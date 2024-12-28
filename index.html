@@ -3,218 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Shop</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Minecraft Server | Rank Shop</title>
     <style>
-        /* Global reset */
+        /* Reset some default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
+
         body {
-            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background: linear-gradient(45deg, #FF6F61, #D1495B);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-        .shop-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            padding: 20px;
-            transition: transform 0.3s ease-in-out;
+            padding: 20px 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.5s ease-in-out;
         }
 
-        .shop-container:hover {
-            transform: scale(1.01);
+        .navbar .logo img {
+            height: 50px;
         }
 
-        .item-card {
-            background: linear-gradient(145deg, #fff, #e6e6e6);
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            padding: 30px 20px;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            height: 350px;
-            opacity: 0.9;
-            transition: transform 0.3s, opacity 0.3s;
-        }
-        .item-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            opacity: 1;
+        .nav-links {
+            list-style-type: none;
+            display: flex;
         }
 
-        .item-card i {
-            font-size: 60px;
-            color: #4CAF50;
-            margin-bottom: 20px;
-            transition: color 0.3s;
+        .nav-links li {
+            margin: 0 20px;
         }
 
-        .item-card:hover i {
-            color: #2196F3;
-        }
-
-        .item-card h3 {
-            font-size: 24px;
-            margin: 15px 0;
+        .nav-links a {
+            color: white;
+            text-decoration: none;
             font-weight: bold;
-            color: #333;
-            text-transform: capitalize;
-        }
-
-        .item-card p {
-            font-size: 16px;
-            color: #777;
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: 1.2rem;
             transition: color 0.3s ease;
         }
 
-        .item-card:hover p {
-            color: #555;
+        .nav-links a:hover {
+            color: #FFD700;
         }
 
-        .item-card a {
-            display: inline-block;
-            padding: 15px 25px;
-            background-color: #4CAF50;
-            color: #fff;
+        /* Hero section */
+        .hero {
+            background: url('background.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .hero .btn {
+            background: #FF6F61;
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 30px;
-            font-size: 18px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background-color 0.3s, transform 0.3s;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+            border-radius: 5px;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .item-card a:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        .hero .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
-        /* Add animation for all items */
-        .item-card {
-            animation: fadeIn 1s ease-out;
+        /* Rank shop section */
+        .rank-shop {
+            padding: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-items: center;
+            animation: fadeInUp 1.5s ease-in-out;
         }
 
+        .rank-item {
+            background-color: #333;
+            padding: 30px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+
+        .rank-item h3 {
+            font-size: 2rem;
+            color: #FFD700;
+        }
+
+        .rank-item p {
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+
+        .rank-item .btn {
+            background: #FF6F61;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .rank-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #444;
+        }
+
+        .rank-item .rank-details {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 1rem;
+            border-radius: 3px;
+            display: none;
+        }
+
+        .rank-item:hover .rank-details {
+            display: block;
+        }
+
+        /* Footer section */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animations */
         @keyframes fadeIn {
-            0% {
+            from {
                 opacity: 0;
-                transform: translateY(50px);
             }
-            100% {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Card layout enhancements */
-        .shop-container {
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: auto;
+            padding-top: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: #fff;
             padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            padding: 20px;
-        }
-
-        /* Add responsive design */
-        @media screen and (max-width: 768px) {
-            .shop-container {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 15px;
-            }
-        }
-
-        /* Add Hover Effects for Buttons */
-        .item-card a {
-            background-color: #4CAF50;
-            transition: all 0.4s ease;
-        }
-
-        .item-card a:hover {
-            background-color: #3e8e41;
-            transform: scale(1.1);
-        }
-
-        /* Improve Typography */
-        h1, h2, h3 {
-            font-family: 'Arial', sans-serif;
+            border-radius: 10px;
+            margin: 15% auto;
+            width: 80%;
+            max-width: 500px;
             color: #333;
         }
 
-        /* Add a smooth page background */
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, #f3f4f6, #ffffff);
-            z-index: -1;
-            opacity: 0.1;
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #FF6F61;
         }
+
+        .modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Popup hover animation */
+        .popup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #FF6F61;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+            transition: opacity 0.5s ease;
+        }
+
+        .popup.show {
+            display: block;
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
-
-    <div class="background"></div>
-
-    <div class="shop-container">
-        <div class="item-card" onclick="window.location.href='https://payment-link.com/item1'">
-            <i class="fas fa-t-shirt"></i>
-            <h3>Stylish T-Shirt</h3>
-            <p>Fresh and comfortable T-shirt perfect for casual wear.</p>
-            <a href="https://payment-link.com/item1">Buy Now</a>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Minecraft Server Logo">
         </div>
-        <div class="item-card" onclick="window.location.href='https://payment-link.com/item2'">
-            <i class="fas fa-headphones"></i>
-            <h3>Noise-Cancelling Headphones</h3>
-            <p>Premium sound quality with amazing noise cancellation.</p>
-            <a href="https://payment-link.com/item2">Buy Now</a>
-        </div>
-        <div class="item-card" onclick="window.location.href='https://payment-link.com/item3'">
-            <i class="fas fa-laptop"></i>
-            <h3>Latest Laptop</h3>
-            <p>High-performance laptop for work and play.</p>
-            <a href="https://payment-link.com/item3">Buy Now</a>
-        </div>
-        <div class="item-card" onclick="window.location.href='https://payment-link.com/item4'">
-            <i class="fas fa-camera"></i>
-            <h3>Digital Camera</h3>
-            <p>Capture every moment with this high-definition camera.</p>
-            <a href="https://payment-link.com/item4">Buy Now</a>
-        </div>
-        <div class="item-card" onclick="window.location.href='https://payment-link.com/item5'">
-            <i class="fas fa-watch"></i>
-            <h3>Luxury Watch</h3>
-            <p>Classy and elegant, perfect for special occasions.</p>
-            <a href="https://payment-link.com/item5">Buy Now</a>
-        </div>
-        <div class="item-card" onclick="window.location.href='https://payment-link.com/item6'">
-            <i class="fas fa-shoe-prints"></i>
-            <h3>Running Shoes</h3>
-            <p>Lightweight and comfortable, perfect for your runs.</p>
-            <a href="https://payment-link.com/item6">Buy Now</a>
-        </div>
-        <!-- Add more items as needed -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="server.html">Server</a></li>
+            <li><a href="ranks.html">Ranks</a></li>
+            <li><a href="staff.html">Staff List</a></li>
+        </ul>
     </div>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to the Minecraft Server</h1>
+        <p>Join the adventure and shop your favorite ranks</p>
+        <a href="#rank-shop" class="btn">Shop Now</a>
+    </section>
+
+    <!-- Rank Shop Section -->
+    <section id="rank-shop" class="rank-shop">
+        <h2>Choose Your Rank</h2>
+        <div class="rank-item">
+            <h3>VIP</h3>
+            <p>Price: $5.99</p>
+            <a href="#" class="btn">Buy Now</a>
+            <div class="rank-details">Access to special features</div>
+        </div>
+        <div class="rank-item">
+            <h3>Moderator</h3>
+            <p>Price: $19.99</p>
+            <a href="#" class="btn">Buy Now</a>
+            <div class="rank-details">Access to moderation tools</div>
+        </div>
+        <div class="rank-item">
+            <h3>Admin</h3>
+            <p>Price: $49.99</p>
+            <a href="#" class="btn">Buy Now</a>
+            <div class="rank-details">Full control over the server</div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Special Offer!</h2>
+            <p>Get 20% off all ranks for a limited time only! Hurry up before it's gone!</p>
+            <button class="btn">Claim Offer</button>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Minecraft Server | All Rights Reserved</p>
+    </footer>
+
+    <!-- Popup notification -->
+    <div class="popup" id="popup">
+        Limited time offer! 20% off on all ranks.
+    </div>
+
+    <!-- Embedded JavaScript for Animations -->
+    <script>
+        // Modal functionality
+        const modal = document.getElementById("myModal");
+        const closeBtn = document.getElementsByClassName("close")[0];
+        const popup = document.getElementById("popup");
+
+        // Display popup notification
+        setTimeout(function () {
+            popup.classList.add('show');
+        }, 3000);
+
+        // Close modal when clicked
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // Open modal when certain button is clicked
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function () {
+                modal.style.display = "block";
+            });
+        });
+
+        // Close modal if clicked outside of modal content
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Hover effect for rank items
+        document.querySelectorAll('.rank-item').forEach(item => {
+            item.addEventListener('mouseover', () => {
+                item.style.transform = 'translateY(-10px)';
+                item.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.5)';
+            });
+            item.addEventListener('mouseout', () => {
+                item.style.transform = 'translateY(0)';
+                item.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.4)';
+            });
+        });
+    </script>
 </body>
 </html>
