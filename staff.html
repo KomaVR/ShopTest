@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff List - Minecraft Server</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Animation for Staff Section on Page Load
+        window.onload = function() {
+            const staffSection = document.querySelector('.staff-list');
+            staffSection.style.animation = 'fadeIn 2s ease-out';
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="server.html">Server</a></li>
+                <li><a href="ranks.html">Ranks</a></li>
+                <li><a href="staff.html">Staff List</a></li>
+                <li><a href="rankshop.html">Rank Shop</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="staff-list">
+        <h1>Meet Our Staff</h1>
+        <div class="staff-card">
+            <img src="staff1.jpg" alt="Staff Member">
+            <h3>John Doe</h3>
+            <p>Owner</p>
+            <p>John is the creator of the server and is responsible for overseeing all server activities.</p>
+        </div>
+        <div class="staff-card">
+            <img src="staff2.jpg" alt="Staff Member">
+            <h3>Jane Smith</h3>
+            <p>Moderator</p>
+            <p>Jane helps manage the server, ensuring players follow the rules.</p>
+        </div>
+        <div class="staff-card">
+            <img src="staff3.jpg" alt="Staff Member">
+            <h3>Alex Brown</h3>
+            <p>Developer</p>
+            <p>Alex is in charge of maintaining and updating the server's mods and plugins.</p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>&copy; 2024 Minecraft Server. All rights reserved.</p>
+    </div>
+</body>
+</html>
